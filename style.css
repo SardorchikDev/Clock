@@ -1,0 +1,153 @@
+/* Monochrome Clock Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+}
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.clock {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 50%;
+    border: 8px solid #333;
+    box-shadow: 
+        0 0 0 4px #222,
+        0 0 0 8px #333,
+        0 0 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.clock-face {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+}
+
+/* Hour markers */
+.marker {
+    position: absolute;
+    background-color: #666;
+    width: 3px;
+    height: 15px;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%);
+}
+
+.marker-12 { top: 15px; height: 20px; background-color: #888; }
+.marker-1 { top: 25px; left: 75%; transform: rotate(30deg) translateX(-50%); }
+.marker-2 { top: 45px; left: 85%; transform: rotate(60deg) translateX(-50%); }
+.marker-3 { top: 50%; right: 15px; left: auto; transform: translateY(-50%) rotate(90deg); height: 20px; background-color: #888; }
+.marker-4 { top: 85%; left: 85%; transform: rotate(120deg) translateX(-50%); }
+.marker-5 { top: 75%; left: 75%; transform: rotate(150deg) translateX(-50%); }
+.marker-6 { bottom: 15px; left: 50%; transform: translateX(-50%) rotate(180deg); height: 20px; background-color: #888; }
+.marker-7 { bottom: 25%; left: 25%; transform: rotate(210deg) translateX(-50%); }
+.marker-8 { bottom: 15%; left: 15%; transform: rotate(240deg) translateX(-50%); }
+.marker-9 { top: 50%; left: 15px; transform: translateY(-50%) rotate(270deg); height: 20px; background-color: #888; }
+.marker-10 { top: 15%; left: 15%; transform: rotate(300deg) translateX(-50%); }
+.marker-11 { top: 25%; left: 25%; transform: rotate(330deg) translateX(-50%); }
+
+/* Hour numbers */
+.number {
+    position: absolute;
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+}
+
+.number-12 { top: 35px; left: 50%; }
+.number-3 { top: 50%; right: 35px; left: auto; transform: translateY(-50%); }
+.number-6 { bottom: 35px; left: 50%; transform: translateX(-50%); }
+.number-9 { top: 50%; left: 35px; transform: translateY(-50%); }
+
+/* Clock hands */
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(0deg);
+    border-radius: 4px;
+}
+
+.hour-hand {
+    width: 8px;
+    height: 80px;
+    background: linear-gradient(to top, #444, #888);
+    z-index: 3;
+    margin-left: -4px;
+}
+
+.minute-hand {
+    width: 5px;
+    height: 110px;
+    background: linear-gradient(to top, #555, #999);
+    z-index: 2;
+    margin-left: -2.5px;
+}
+
+.second-hand {
+    width: 2px;
+    height: 130px;
+    background: #ccc;
+    z-index: 1;
+    margin-left: -1px;
+}
+
+.second-hand::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+/* Center dot */
+.center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: #888;
+    border-radius: 50%;
+    z-index: 4;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Digital clock */
+.digital-clock {
+    color: #888;
+    font-size: 28px;
+    letter-spacing: 4px;
+    background-color: #222;
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
