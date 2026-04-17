@@ -3,57 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monochrome Clock</title>
+    <title>Manga Style Clock</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="clock-container">
-        <div class="clock">
-            <div class="clock-face">
-                <!-- Hour markers -->
-                <div class="marker marker-12"></div>
-                <div class="marker marker-1"></div>
-                <div class="marker marker-2"></div>
-                <div class="marker marker-3"></div>
-                <div class="marker marker-4"></div>
-                <div class="marker marker-5"></div>
-                <div class="marker marker-6"></div>
-                <div class="marker marker-7"></div>
-                <div class="marker marker-8"></div>
-                <div class="marker marker-9"></div>
-                <div class="marker marker-10"></div>
-                <div class="marker marker-11"></div>
-                
-                <!-- Minute markers (every 5 minutes) -->
-                <div class="minute-marker minute-5"></div>
-                <div class="minute-marker minute-10"></div>
-                <div class="minute-marker minute-15"></div>
-                <div class="minute-marker minute-20"></div>
-                <div class="minute-marker minute-25"></div>
-                <div class="minute-marker minute-30"></div>
-                <div class="minute-marker minute-35"></div>
-                <div class="minute-marker minute-40"></div>
-                <div class="minute-marker minute-45"></div>
-                <div class="minute-marker minute-50"></div>
-                <div class="minute-marker minute-55"></div>
-                <div class="minute-marker minute-0"></div>
-                
-                <!-- Hour numbers -->
-                <div class="number number-12">12</div>
-                <div class="number number-3">3</div>
-                <div class="number number-6">6</div>
-                <div class="number number-9">9</div>
-                
-                <!-- Clock hands -->
-                <div class="hand hour-hand" id="hour-hand"></div>
-                <div class="hand minute-hand" id="minute-hand"></div>
-                <div class="hand second-hand" id="second-hand"></div>
-                
-                <!-- Center dot -->
-                <div class="center-dot"></div>
-            </div>
+        <!-- Manga-style speech bubble -->
+        <div class="speech-bubble">
+            <div class="bubble-text">TIME</div>
         </div>
-        <div class="digital-clock" id="digital-clock">00:00:00</div>
+        
+        <!-- Main digital clock display -->
+        <div class="digital-clock" id="digital-clock">
+            <span class="time-segment hours">00</span>
+            <span class="time-separator">:</span>
+            <span class="time-segment minutes">00</span>
+            <span class="time-separator">:</span>
+            <span class="time-segment seconds">00</span>
+        </div>
+        
+        <!-- Manga-style decorative elements -->
+        <div class="manga-decoration">
+            <div class="star star-1">★</div>
+            <div class="star star-2">★</div>
+            <div class="star star-3">★</div>
+            <div class="sparkle sparkle-1">✦</div>
+            <div class="sparkle sparkle-2">✦</div>
+            <div class="sparkle sparkle-3">✦</div>
+        </div>
+        
+        <!-- Date display in manga style -->
+        <div class="date-display" id="date-display">
+            <span class="day-name">MONDAY</span>
+            <span class="date-number">01</span>
+            <span class="month-name">JANUARY</span>
+        </div>
+        
+        <!-- Am/Pm indicator -->
+        <div class="ampm-indicator" id="ampm-indicator">AM</div>
     </div>
     
     <script src="script.js"></script>

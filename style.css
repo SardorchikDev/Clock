@@ -1,4 +1,4 @@
-/* Monochrome Clock Styles */
+/* Manga Style Clock - Dark Theme */
 * {
     margin: 0;
     padding: 0;
@@ -6,223 +6,206 @@
 }
 
 body {
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Courier New', monospace;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    overflow: hidden;
 }
 
 .clock-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-}
-
-.clock {
-    width: 350px;
-    height: 350px;
-    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    border-radius: 50%;
-    border: 8px solid #333;
-    box-shadow: 
-        0 0 0 4px #222,
-        0 0 0 8px #333,
-        0 0 30px rgba(0, 0, 0, 0.8),
-        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    gap: 20px;
     position: relative;
 }
 
-.clock-face {
+/* Speech bubble for manga effect */
+.speech-bubble {
+    background: linear-gradient(145deg, #ff6b6b, #ee5a5a);
+    padding: 8px 20px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 
+        0 4px 15px rgba(255, 107, 107, 0.4),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 15px solid #ee5a5a;
+}
+
+.bubble-text {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Main digital clock */
+.digital-clock {
+    background: linear-gradient(145deg, #2a2a4a, #1a1a3a);
+    padding: 30px 50px;
+    border-radius: 15px;
+    border: 4px solid #4a4a6a;
+    box-shadow: 
+        0 0 0 3px #3a3a5a,
+        0 0 30px rgba(100, 100, 200, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.digital-clock::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid #6a6a8a;
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+.time-segment {
+    font-size: 72px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(100, 150, 255, 0.5),
+        0 0 30px rgba(100, 150, 255, 0.3);
+    letter-spacing: 5px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.time-separator {
+    font-size: 60px;
+    color: #ff6b6b;
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+    animation: blink 1s ease-in-out infinite;
+}
+
+/* Manga decoration stars */
+.manga-decoration {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: relative;
-    border-radius: 50%;
+    pointer-events: none;
 }
 
-/* Hour markers */
-.marker {
+.star {
     position: absolute;
-    background-color: #666;
-    width: 3px;
-    height: 15px;
-    left: 50%;
-    transform-origin: bottom center;
-    transform: translateX(-50%);
-    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    color: #ffd700;
+    font-size: 20px;
+    animation: twinkle 1.5s ease-in-out infinite;
 }
 
-.marker-12 { top: 15px; height: 20px; background-color: #888; }
-.marker-1 { top: 25px; left: 75%; transform: rotate(30deg) translateX(-50%); }
-.marker-2 { top: 45px; left: 85%; transform: rotate(60deg) translateX(-50%); }
-.marker-3 { top: 50%; right: 15px; left: auto; transform: translateY(-50%) rotate(90deg); height: 20px; background-color: #888; }
-.marker-4 { top: 85%; left: 85%; transform: rotate(120deg) translateX(-50%); }
-.marker-5 { top: 75%; left: 75%; transform: rotate(150deg) translateX(-50%); }
-.marker-6 { bottom: 15px; left: 50%; transform: translateX(-50%) rotate(180deg); height: 20px; background-color: #888; }
-.marker-7 { bottom: 25%; left: 25%; transform: rotate(210deg) translateX(-50%); }
-.marker-8 { bottom: 15%; left: 15%; transform: rotate(240deg) translateX(-50%); }
-.marker-9 { top: 50%; left: 15px; transform: translateY(-50%) rotate(270deg); height: 20px; background-color: #888; }
-.marker-10 { top: 15%; left: 15%; transform: rotate(300deg) translateX(-50%); }
-.marker-11 { top: 25%; left: 25%; transform: rotate(330deg) translateX(-50%); }
+.star-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.star-2 { top: 20%; right: 15%; animation-delay: 0.5s; }
+.star-3 { bottom: 30%; left: 15%; animation-delay: 1s; }
 
-/* Additional minute markers */
-.minute-marker {
+.sparkle {
     position: absolute;
-    background-color: #444;
-    width: 1px;
-    height: 8px;
-    left: 50%;
-    transform-origin: bottom center;
-    transform: translateX(-50%);
+    color: #fff;
+    font-size: 14px;
+    animation: sparkle 2s ease-in-out infinite;
 }
 
-.minute-0 { top: 15px; height: 12px; background-color: #555; }
-.minute-5 { top: 20px; left: 65%; transform: rotate(30deg) translateX(-50%); }
-.minute-10 { top: 35px; left: 80%; transform: rotate(60deg) translateX(-50%); }
-.minute-15 { top: 50%; right: 20px; left: auto; transform: translateY(-50%) rotate(90deg); height: 12px; background-color: #555; }
-.minute-20 { top: 80%; left: 80%; transform: rotate(120deg) translateX(-50%); }
-.minute-25 { top: 70%; left: 65%; transform: rotate(150deg) translateX(-50%); }
-.minute-30 { bottom: 20px; left: 50%; transform: translateX(-50%) rotate(180deg); height: 12px; background-color: #555; }
-.minute-35 { bottom: 30%; left: 35%; transform: rotate(210deg) translateX(-50%); }
-.minute-40 { bottom: 20%; left: 20%; transform: rotate(240deg) translateX(-50%); }
-.minute-45 { top: 50%; left: 20px; transform: translateY(-50%) rotate(270deg); height: 12px; background-color: #555; }
-.minute-50 { top: 20%; left: 20%; transform: rotate(300deg) translateX(-50%); }
-.minute-55 { top: 30%; left: 35%; transform: rotate(330deg) translateX(-50%); }
+.sparkle-1 { top: 15%; left: 25%; animation-delay: 0.3s; }
+.sparkle-2 { top: 25%; right: 25%; animation-delay: 0.8s; }
+.sparkle-3 { bottom: 25%; left: 25%; animation-delay: 1.3s; }
 
-/* Hour numbers */
-.number {
-    position: absolute;
-    color: #aaa;
+/* Date display */
+.date-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(42, 42, 74, 0.8);
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: 2px solid #5a5a7a;
+}
+
+.day-name {
+    color: #ff6b6b;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.date-number {
+    color: #fff;
     font-size: 24px;
     font-weight: bold;
-    transform: translate(-50%, -50%);
-    text-shadow: 0 0 3px rgba(0,0,0,0.5);
-    font-family: 'Arial', sans-serif;
+    background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+    padding: 5px 15px;
+    border-radius: 5px;
 }
 
-.number-12 { top: 35px; left: 50%; }
-.number-3 { top: 50%; right: 35px; left: auto; transform: translateY(-50%); }
-.number-6 { bottom: 35px; left: 50%; transform: translateX(-50%); }
-.number-9 { top: 50%; left: 35px; transform: translateY(-50%); }
+.month-name {
+    color: #a0a0c0;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
 
-/* Clock hands */
-.hand {
+/* AM/PM indicator */
+.ampm-indicator {
     position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform-origin: bottom center;
-    transform: translateX(-50%) rotate(0deg);
-    border-radius: 4px;
-    transition: transform 0.1s ease-out;
-}
-
-.hour-hand {
-    width: 10px;
-    height: 90px;
-    background: linear-gradient(to top, #333, #666, #888);
-    z-index: 3;
-    margin-left: -5px;
-    border-radius: 5px 5px 2px 2px;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-
-.minute-hand {
-    width: 6px;
-    height: 120px;
-    background: linear-gradient(to top, #444, #777, #999);
-    z-index: 2;
-    margin-left: -3px;
-    border-radius: 3px 3px 1px 1px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
-
-.second-hand {
-    width: 2px;
-    height: 140px;
-    background: linear-gradient(to top, #888, #ccc);
-    z-index: 1;
-    margin-left: -1px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    animation: second-hand-glow 1s ease-in-out infinite alternate;
-}
-
-@keyframes second-hand-glow {
-    from {
-        box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
-    to {
-        box-shadow: 1px 1px 4px rgba(200,200,200,0.3);
-    }
-}
-
-.second-hand::after {
-    content: '';
-    position: absolute;
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    background-color: #ccc;
-    border-radius: 50%;
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
-}
-
-/* Center dot enhancement */
-.center-dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 14px;
-    height: 14px;
-    background: linear-gradient(145deg, #888, #666);
-    border-radius: 50%;
-    z-index: 4;
-    box-shadow: 
-        0 0 5px rgba(0,0,0,0.5),
-        inset 0 1px 2px rgba(255,255,255,0.1);
-}
-
-/* Digital clock */
-.digital-clock {
-    color: #aaa;
-    font-size: 28px;
-    letter-spacing: 4px;
-    background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
-    padding: 15px 30px;
-    border-radius: 8px;
-    border: 2px solid #333;
-    box-shadow: 
-        inset 0 0 10px rgba(0, 0, 0, 0.5),
-        0 2px 4px rgba(0,0,0,0.3);
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 5px rgba(170,170,170,0.3);
-}
-
-/* Additional clock face details */
-.clock-face::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 1px solid #2a2a2a;
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.clock-face::after {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 15px;
     right: 20px;
-    bottom: 20px;
-    border: 1px solid #252525;
-    border-radius: 50%;
-    pointer-events: none;
+    background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.5); }
+    50% { opacity: 0.8; transform: scale(1); }
+}
+
+/* Glow effect on time segments */
+.time-segment.active {
+    color: #fff;
+    text-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.8),
+        0 0 30px rgba(100, 150, 255, 0.8),
+        0 0 45px rgba(100, 150, 255, 0.5);
 }
