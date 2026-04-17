@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manga Style Clock</title>
+    <title>Anime Style Digital Clock</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,21 +15,35 @@
         
         <!-- Main digital clock display -->
         <div class="digital-clock" id="digital-clock">
-            <span class="time-segment hours">00</span>
+            <span class="time-segment hours" data-value="00">00</span>
             <span class="time-separator">:</span>
-            <span class="time-segment minutes">00</span>
+            <span class="time-segment minutes" data-value="00">00</span>
             <span class="time-separator">:</span>
-            <span class="time-segment seconds">00</span>
+            <span class="time-segment seconds" data-value="00">00</span>
+            
+            <!-- AM/PM indicator -->
+            <div class="ampm-indicator" id="ampm-indicator">AM</div>
         </div>
         
         <!-- Manga-style decorative elements -->
         <div class="manga-decoration">
+            <!-- Stars -->
             <div class="star star-1">★</div>
             <div class="star star-2">★</div>
             <div class="star star-3">★</div>
+            <div class="star star-4">★</div>
+            <div class="star star-5">★</div>
+            
+            <!-- Sparkles -->
             <div class="sparkle sparkle-1">✦</div>
             <div class="sparkle sparkle-2">✦</div>
             <div class="sparkle sparkle-3">✦</div>
+            <div class="sparkle sparkle-4">✦</div>
+            <div class="sparkle sparkle-5">✦</div>
+            
+            <!-- Decorative circles -->
+            <div class="decoration-circle circle-1"></div>
+            <div class="decoration-circle circle-2"></div>
         </div>
         
         <!-- Date display in manga style -->
@@ -38,9 +52,6 @@
             <span class="date-number">01</span>
             <span class="month-name">JANUARY</span>
         </div>
-        
-        <!-- Am/Pm indicator -->
-        <div class="ampm-indicator" id="ampm-indicator">AM</div>
     </div>
     
     <script src="script.js"></script>

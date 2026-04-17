@@ -1,4 +1,4 @@
-// Manga Style Digital Clock JavaScript
+// Authentic Manga/Anime Style Digital Clock JavaScript
 function updateClock() {
     const now = new Date();
     
@@ -16,9 +16,18 @@ function updateClock() {
     const minutesElement = document.querySelector('.time-segment.minutes');
     const secondsElement = document.querySelector('.time-segment.seconds');
     
-    if (hoursElement) hoursElement.textContent = formattedHours;
-    if (minutesElement) minutesElement.textContent = formattedMinutes;
-    if (secondsElement) secondsElement.textContent = formattedSeconds;
+    if (hoursElement) {
+        hoursElement.textContent = formattedHours;
+        hoursElement.setAttribute('data-value', formattedHours);
+    }
+    if (minutesElement) {
+        minutesElement.textContent = formattedMinutes;
+        minutesElement.setAttribute('data-value', formattedMinutes);
+    }
+    if (secondsElement) {
+        secondsElement.textContent = formattedSeconds;
+        secondsElement.setAttribute('data-value', formattedSeconds);
+    }
     
     // Update AM/PM indicator
     const ampmElement = document.getElementById('ampm-indicator');
@@ -28,6 +37,9 @@ function updateClock() {
     
     // Update date display
     updateDateDisplay(now);
+    
+    // Add active class to current time segment for extra glow
+    updateActiveGlow();
 }
 
 function updateDateDisplay(date) {
@@ -44,6 +56,22 @@ function updateDateDisplay(date) {
     if (monthNameElement) monthNameElement.textContent = months[date.getMonth()];
 }
 
+function updateActiveGlow() {
+    const timeSegments = document.querySelectorAll('.time-segment');
+    const now = new Date();
+    const seconds = now.getSeconds();
+    
+    // Add active class to seconds for pulsing effect
+    timeSegments.forEach(segment => {
+        segment.classList.remove('active');
+    });
+    
+    const secondsElement = document.querySelector('.time-segment.seconds');
+    if (secondsElement) {
+        secondsElement.classList.add('active');
+    }
+}
+
 // Add some interactivity - glow effect on hover
 function addInteractivity() {
     const timeSegments = document.querySelectorAll('.time-segment');
@@ -55,7 +83,41 @@ function addInteractivity() {
             segment.classList.remove('active');
         });
     });
+    
+    // Add sparkle effect on click
+    document.addEventListener('click', (e) => {
+        createSparkle(e.clientX, e.clientY);
+    });
 }
+
+function createSparkle(x, y) {
+    const sparkle = document.createElement('div');
+    sparkle.textContent = '✦';
+    sparkle.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        color: #fff;
+        font-size: 20px;
+        pointer-events: none;
+        z-index: 1000;
+        animation: sparkleClick 0.5s ease-out forwards;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #0088ff;
+    `;
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 500);
+}
+
+// Add click sparkle animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes sparkleClick {
+        0% { transform: scale(1) rotate(0deg); opacity: 1; }
+        100% { transform: scale(2) rotate(180deg); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 
 // Start the clock
 function startClock() {
